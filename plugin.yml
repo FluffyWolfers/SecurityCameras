@@ -1,3 +1,12 @@
 name: SecurityCameras
 main: me.FluffyWolfers.SC.SC
 version: 1.0
+commands:
+  securitycameras:
+    description: Main command for SecurityCameras plugin
+    permission: securitycameras.sc
+    permission-message: No no no!
+    aliases: [securitycamera, security, cameras, camera, sc]
+permissions:
+  securitycameras.sc:
+    default: true

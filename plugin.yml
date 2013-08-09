@@ -1,6 +1,8 @@
 name: SecurityCameras
 main: me.FluffyWolfers.SC.SC
 version: 1.0
+depend: [BKCommonLib]
+softdepend: [BKCommonLib]
 commands:
   securitycameras:
     description: Main command for SecurityCameras plugin

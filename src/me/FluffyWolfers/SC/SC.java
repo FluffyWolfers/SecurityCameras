@@ -16,7 +16,7 @@ public class SC extends JavaPlugin{
 		pdf = this.getDescription();
 		
 		Bukkit.getLogger().info("[SecurityCameras v" + pdf.getVersion() + "] Starting up...");
-
+		
 		this.getCommand("securitycamera").setExecutor(new SCCommand());
 		this.getCommand("securitycameras").setExecutor(new SCCommand());
 		this.getCommand("security").setExecutor(new SCCommand());
@@ -24,10 +24,16 @@ public class SC extends JavaPlugin{
 		this.getCommand("cameras").setExecutor(new SCCommand());
 		this.getCommand("sc").setExecutor(new SCCommand());
 		
+		Bukkit.getPluginManager().registerEvents(new SCJoinListener(), this);
+		
 	}
 	
 	public static String getPreifx(){
 		return ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "SecurityCameras" + ChatColor.DARK_AQUA + "] " + ChatColor.DARK_PURPLE;
+	}
+	
+	public static String getLogPrefix(){
+		return "[" + pdf.getName() + " v" + pdf.getVersion() + "]";
 	}
 	
 }

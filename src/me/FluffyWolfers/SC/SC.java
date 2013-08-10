@@ -26,6 +26,14 @@ public class SC extends JavaPlugin{
 		
 		Bukkit.getPluginManager().registerEvents(new SCJoinListener(), this);
 		
+		this.changeBatNoise();
+		
+	}
+	
+	public void changeBatNoise(){
+		
+		
+		
 	}
 	
 	public static String getPreifx(){

@@ -4,19 +4,27 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.server.v1_6_R2.EntityBat;
+import net.minecraft.server.v1_6_R2.PathEntity;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.v1_6_R2.entity.CraftBat;
 import org.bukkit.entity.Bat;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 public class SCCommand implements CommandExecutor{
-
+	
+	public static ArrayList<Entity> bats = new ArrayList<Entity>();
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		if(sender instanceof Player){
@@ -72,9 +80,19 @@ public class SCCommand implements CommandExecutor{
 								yaml.save(file);
 							}catch(Exception e){e.printStackTrace();}
 							
-							Bat bat = (Bat) loc.getWorld().spawnEntity(loc, EntityType.BAT);
-							bat.setCustomName(cName);
-							bat.setCustomNameVisible(false);
+							Entity entity = loc.getWorld().spawnEntity(loc, EntityType.BAT);
+							LivingEntity l = (LivingEntity) entity;
+							Location to = entity.getLocation();
+					        EntityBat ec = ((CraftBat)l).getHandle();
+					        PathEntity path = ec.getNavigation().a(to.getX(), to.getY(), to.getZ());
+					        ec.getNavigation().a(path, 0.1F);
+					        
+							((Bat)entity).setCustomName(cName);
+							((Bat)entity).setCustomNameVisible(false);
+							Bat bat = (Bat) entity;
+							bat.setCanPickupItems(false);
+							
+							bats.add(entity);
 							
 							BukkitTask task = new SCRun().runTaskTimer(SC.s, 0, 1);
 						}else{
@@ -98,9 +116,19 @@ public class SCCommand implements CommandExecutor{
 									yaml.save(file);
 								}catch(Exception e){e.printStackTrace();}
 								
-								Bat bat = (Bat) loc.getWorld().spawnEntity(loc, EntityType.BAT);
-								bat.setCustomName(cName);
-								bat.setCustomNameVisible(false);
+								Entity entity = loc.getWorld().spawnEntity(loc, EntityType.BAT);
+								LivingEntity l = (LivingEntity) entity;
+								Location to = entity.getLocation();
+						        EntityBat ec = ((CraftBat)l).getHandle();
+						        PathEntity path = ec.getNavigation().a(to.getX(), to.getY(), to.getZ());
+						        ec.getNavigation().a(path, 0.1F);
+						        
+								((Bat)entity).setCustomName(cName);
+								((Bat)entity).setCustomNameVisible(false);
+								Bat bat = (Bat) entity;
+								bat.setCanPickupItems(false);
+								
+								bats.add(entity);
 								
 								BukkitTask task = new SCRun().runTaskTimer(SC.s, 0, 1);
 								
